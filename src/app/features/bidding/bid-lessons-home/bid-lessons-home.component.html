@@ -1,0 +1,25 @@
+<mat-toolbar style=" border-bottom: 2px dotted blue;">
+  <a href="#/home"><i class="material-icons">home</i></a>
+<span class="header-spacer"></span>
+<span>{{title}}</span>
+</mat-toolbar>
+<div class="container-fluid">
+
+
+  <mat-card class="jbcard">
+    <mat-card-header>
+      <div mat-card-avatar></div>
+      <mat-card-title>Opening</mat-card-title>
+      <mat-card-subtitle>Major 5</mat-card-subtitle>
+    </mat-card-header>
+    <img class="centerred" mat-card-image src="assets/images/bidding-box-cards_1.png" style="width:140px;">
+    <mat-card-content>
+      <p>
+       Learn how to open and responds and more...
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="opening()">Learn</button>
+    </mat-card-actions>
+  </mat-card>
+  </div>
