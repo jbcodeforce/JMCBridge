@@ -1,24 +1,72 @@
-<mat-toolbar style=" border-bottom: 2px dotted blue;">
-  <a href="#/home"><i class="material-icons">home</i></a>
-<span class="header-spacer"></span>
-<span>{{title}}</span>
+<div class="row"> 
+<mat-toolbar style=" border-bottom: 2px dotted #003300;">
+  <a (click)="back()"><span><i class="header-icon material-icons">arrow_back</i></span></a>
+  <span class="header-spacer"></span>
+<span>{{lesson.name}}</span>
 </mat-toolbar>
-<div class="container-fluid">
-  <img #c_0 src="{{cardImgSrcs[0]}}" (load)="drawCard(0)" style='display: none;' />
-  <img #c_1 src="{{cardImgSrcs[1]}}" (load)="drawCard(1)" style='display: none;' />
-  <img #c_2 src="{{cardImgSrcs[2]}}" (load)="drawCard(2)" style='display: none;' />
-  <img #c_3 src="{{cardImgSrcs[3]}}" (load)="drawCard(3)" style='display: none;' />
-  <img #c_4 src="{{cardImgSrcs[4]}}" (load)="drawCard(4)" style='display: none;' />
-  <img #c_5 src="{{cardImgSrcs[5]}}" (load)="drawCard(5)" style='display: none;' />
-  <img #c_6 src="{{cardImgSrcs[6]}}" (load)="drawCard(6)" style='display: none;' />
-  <img #c_7 src="{{cardImgSrcs[7]}}" (load)="drawCard(7)" style='display: none;' />
-  <img #c_8 src="{{cardImgSrcs[8]}}" (load)="drawCard(8)" style='display: none;' />
-  <img #c_9 src="{{cardImgSrcs[9]}}" (load)="drawCard(9)" style='display: none;' />
-  <img #c_10 src="{{cardImgSrcs[10]}}" (load)="drawCard(10)" style='display: none;' />
-  <img #c_11 src="{{cardImgSrcs[11]}}" (load)="drawCard(11)" style='display: none;' />
-  <img #c_12 src="{{cardImgSrcs[12]}}" (load)="drawCard(12)" style='display: none;' />
-  <img #biddings src="assets/images/bidding-cards.png" (load)="drawBidding()" style='display: none;'/>
-  <canvas #canvas width="{{canvasWidth}}" height="{{canvasHeight}}" style="background:#003300;"></canvas>
+</div>
+
+<img #c_0 src="{{cardImgSrcs[0]}}" (load)="drawCard(0)" style='display: none;' />
+<img #c_1 src="{{cardImgSrcs[1]}}" (load)="drawCard(1)" style='display: none;' />
+<img #c_2 src="{{cardImgSrcs[2]}}" (load)="drawCard(2)" style='display: none;' />
+<img #c_3 src="{{cardImgSrcs[3]}}" (load)="drawCard(3)" style='display: none;' />
+<img #c_4 src="{{cardImgSrcs[4]}}" (load)="drawCard(4)" style='display: none;' />
+<img #c_5 src="{{cardImgSrcs[5]}}" (load)="drawCard(5)" style='display: none;' />
+<img #c_6 src="{{cardImgSrcs[6]}}" (load)="drawCard(6)" style='display: none;' />
+<img #c_7 src="{{cardImgSrcs[7]}}" (load)="drawCard(7)" style='display: none;' />
+<img #c_8 src="{{cardImgSrcs[8]}}" (load)="drawCard(8)" style='display: none;' />
+<img #c_9 src="{{cardImgSrcs[9]}}" (load)="drawCard(9)" style='display: none;' />
+<img #c_10 src="{{cardImgSrcs[10]}}" (load)="drawCard(10)" style='display: none;' />
+<img #c_11 src="{{cardImgSrcs[11]}}" (load)="drawCard(11)" style='display: none;' />
+<img #c_12 src="{{cardImgSrcs[12]}}" (load)="drawCard(12)" style='display: none;' />
+<img #biddings src="assets/images/bidding-cards.png" (load)="drawBidding()" style='display: none;'/>
+<!-- Use material grid for a 6 rows by 5 columns-->
+<div class="grid-container"> 
+    <div class="canvasCol">
+       <canvas #canvas width="{{canvasWidth}}" height="{{canvasHeight}}" style="background:#003300;"></canvas>
+       
+    </div>
+    <div class="col">
+        <mat-vertical-stepper [linear]="true" #stepper>
+            <mat-step *ngFor="let inst of currentExercise.instructions">
+                <ng-template matStepLabel>{{inst.label}}</ng-template>
+                <div>
+                   {{inst.subPart}}
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Select your bid</ng-template>
+                <div>
+                    <button  mat-icon-button color="primary" (click)="validate()"><mat-icon>looks</mat-icon></button>
+                    <button  mat-icon-button color="primary" (click)="next()"><mat-icon>navigate_next</mat-icon></button>
+                    {{this.message}}
+                </div>
+            </mat-step>
+        </mat-vertical-stepper>
+    </div>
+    <!-- 
+    <mat-grid-list cols="5" rowHeight="100px">
+        <mat-grid-tile [colspan]=4 [rowspan]=5>
+            <canvas #canvas width="{{canvasWidth}}" height="{{canvasHeight}}" style="background:#003300;"></canvas>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]=1 [rowspan]=5>
+            <mat-vertical-stepper [linear]="true" #stepper>
+                <mat-step>
+                  <ng-template matStepLabel>Count you HD points</ng-template>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>{{currentExercise.instructions}}</ng-template>
+                </mat-step>
+            </mat-vertical-stepper>
+            
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]=4 [rowspan]=1>
+            <button  mat-icon-button color="primary" (click)="validate()"><mat-icon>looks</mat-icon></button>
+            <button  mat-icon-button color="primary" (click)="next()"><mat-icon>navigate_next</mat-icon></button>
+    
+        </mat-grid-tile>
+    </mat-grid-list>
+-->
 </div>
 
 

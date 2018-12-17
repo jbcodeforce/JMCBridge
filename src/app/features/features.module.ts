@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { MatToolbarModule, MatCardModule } from '@angular/material';
+import { MatToolbarModule, 
+         MatCardModule , 
+         MatIconModule, 
+         MatTableModule, 
+         MatGridListModule,
+         MatStepperModule,
+         MatSortModule} from '@angular/material';
 
 import { SharedModule } from '../shared/shared.module';
 import { routes } from './routes';
@@ -20,7 +26,12 @@ import { BidLessonService } from './bidding/bid-lesson.service';
       enableTracing: false
       }),
       MatToolbarModule,
-      MatCardModule
+      MatCardModule,
+      MatTableModule,
+      MatSortModule,
+      MatGridListModule,
+      MatStepperModule,
+      MatIconModule
   ],
   declarations: [HomeComponent, BidLessonsHomeComponent, BidLessonsComponent, BidGameComponent],
   exports: [HomeComponent, BidLessonsHomeComponent, RouterModule],

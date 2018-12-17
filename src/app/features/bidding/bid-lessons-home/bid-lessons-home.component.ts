@@ -17,7 +17,7 @@ export class BidLessonsHomeComponent implements OnInit {
 
   opening(){
     console.log('Opening setting');
-    this.bidService.setLessonName('opening');
+    this.bidService.setLessonCategoryName('Opening');
     this.router.navigate(['bidLesson']);
   }
 }

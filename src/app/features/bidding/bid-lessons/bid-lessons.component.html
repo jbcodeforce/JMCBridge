@@ -1,3 +1,41 @@
-<p>
-  bid-lessons works!
-</p>
+
+<mat-toolbar>
+    <a (click)="back()"><span><i class="header-icon material-icons">arrow_back</i></span></a>
+    <span class="header-spacer"></span>
+<span>{{title}}</span>
+</mat-toolbar>
+<div class="row">
+    <table mat-table [dataSource]="lessons" matSort class="mat-elevation-z8">
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="currentExercise">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Current Exercise </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.currentExercise}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="total">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Number of Exercises </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.total}} </mat-cell>
+        </ng-container>
+      <ng-container matColumnDef="completion">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Completion </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.completion}} </mat-cell>
+      </ng-container>
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+  
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button *ngIf="element.completion !== 1" mat-icon-button color="primary" (click)="open(element)"><mat-icon>play_arrow</mat-icon></button>
+          <button *ngIf="element.completion === 1" mat-icon-button color="primary"><mat-icon>done</mat-icon></button>
+       
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </table>
+  </div>

@@ -1,10 +1,33 @@
 <div class="container-fluid">
+  <mat-grid-list cols="3" rowHeight="400px">
+    <mat-grid-tile>
+        <app-tilecard id="learnbid" [smImg]="'assets/images/bidding-box-cards_1.png'"  
+        [title]="'Bidding'" 
+        [subTitle]="'5 card Major'"
+        [description]="'Learn how to bid using a step by step approach from beginner to expert'" 
+        [buttonName]="'Learn'" [urlPath]="'bidLessonHome'">
+      </app-tilecard>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <app-tilecard id="learncard" [smImg]="'assets/images/hand.png'"  
+        [title]="'Card Play'" 
+        [subTitle]="'Attack Play'"
+        [description]="'Learn how to play your contract'" 
+        [buttonName]="'Learn'" [urlPath]="'cardLessonHome'">
+      </app-tilecard>
+    </mat-grid-tile>
+  
+  <mat-grid-tile>
+      <app-tilecard id="learncard" [smImg]="'assets/images/hand.png'"  
+      [title]="'Card Play'" 
+      [subTitle]="'Defence Play'"
+      [description]="'Learn how to play defense'" 
+      [buttonName]="'Learn'" [urlPath]="'defenseLessonHome'">
+    </app-tilecard>
+  </mat-grid-tile>
+  
+</mat-grid-list>
 
-<app-tilecard id="learnbid" [smImg]="'assets/images/bidding-box-cards_1.png'"  
-  [title]="'Bidding'" 
-  [subTitle]="'5 card Major'"
-  [description]="'Learn how to bid using a step by step approach from beginner to expert'" 
-  [buttonName]="'Learn'" [urlPath]="'bidLessonHome'">
-</app-tilecard>
+
 
 </div>
