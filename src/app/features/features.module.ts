@@ -8,7 +8,6 @@ import { MatToolbarModule,
          MatGridListModule,
          MatStepperModule,
          MatSortModule} from '@angular/material';
-
 import { SharedModule } from '../shared/shared.module';
 import { routes } from './routes';
 import { HomeComponent } from './home/home.component';
@@ -32,7 +31,7 @@ import { BidLessonService } from './bidding/bid-lesson.service';
       MatGridListModule,
       MatStepperModule,
       MatIconModule
-  ],
+      ],
   declarations: [HomeComponent, BidLessonsHomeComponent, BidLessonsComponent, BidGameComponent],
   exports: [HomeComponent, BidLessonsHomeComponent, RouterModule],
   providers: [BidLessonService]

@@ -1,0 +1,43 @@
+% This is the PBN for the book Pas a Pas tome 1- NT
+% Prepared J Boyer 12/2011
+% This PBN is enriched to add principal section and comment
+[Event "Play Card: No Trump"]
+[Site "Book"]
+[Date "1987"]
+[Lesson: "Keep communication"]
+[Board "Deal_4"]
+[Dealer "N"]
+[Vulnerable "All"]
+[Deal "N:KQ32.K3.AK982.86 765.J8.QT743.K54 A4.A7542.5.QJT92 JT98.QT96.J6.A73"]
+[Declarer "S"]
+[Contract "3NT"]
+[Result "9"]
+[Score "NS 630"]
+[Level "1"]
+[XP "4"]
+[Auction "N"]
+1D Pass 1H Pass
+1S Pass 2NT Pass
+3NT Pass Pass Pass
+[Play "W"]
+SJ SK S5 S4
+C6 C4 CQ C3
+CJ C7 C8 CK
+S6 SA S8 S2
+CT CA D2 C5
+DJ DA D3 D5
+SD S7 H2 S9
+HK H8 H4 H6
+DK D4 H4 D6
+H3 HJ HA H9
+C9 SJ D2 D7
+C2 ST S3 DT
+H7 HQ D9 DQ
+[Comment "Compute the number winning tricks"]
+[Comment "What color will bring the missing 2 tricks?"]
+[Comment "Club is better, as heart needs 3-3 distribution. But how many time you need to come back to your hand?"]
+[Comment "Two. The defense will let the first club goes."]
+[Comment "Which card to play from dummy on the opening trick?"]
+[Principal "Keep communication to the long color, playing the maximum security."]
+[Principal "Take the trick from the honor which will not impact communication."]
+*

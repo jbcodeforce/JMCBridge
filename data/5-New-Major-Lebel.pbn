@@ -1,0 +1,32 @@
+% This is the PBN to describe a tutorial
+% Prepared J Boyer 2/2013
+% This PBN is enriched to add principals and comments, experience points, level
+[Event "New Major by 5 - Lebel"]
+[Site "Book"]
+[Date "2010"]
+[Lesson "Assessing Strength #1"]
+[Level "1"]
+[XP "3"]
+[TutorialType bid]
+[Deal "S:A6.AQT85.K93.962"]
+[Principal "Before doing your first bid, start by counting your points to evaluate the strength of your hand."]
+[Principal "Bidding is used to assess the number of points you and your partner have, and assess the contract"]
+[Principal "type: No trump or at the color, and how many tricks the team can get. A slam is all 13 tricks"]
+[Principal "Counting Distribution-Honor points is the way to assess the value of your hand."]
+[Principal "Honor points: Ace = 4H;  King = 3H; Queen= 2H; Jack = 1H"]
+[Principal "Distribution points: Chicane (no card) = 3D;  Singleton = 2D; Doublon= 1D"]
+[Instruction "How many DH points for this hand?"]
+[Choice "B"]
+A-12DH
+B-13DH
+C-14DH
+*
+[Event "#"]
+[Site "#"]
+[Date "#"]
+[Lesson "Assessing Strength #2"]
+[Deal "S:A6.AQT85.K93.962"]
+[Principal "To open a color at level 1, you need 12H or 14DH"]
+[Principal "Single honors decrease the hand value, for the opening bid"]
+[Principal "Consider 3DH a single K and 2DH a single Q or J"]
+*

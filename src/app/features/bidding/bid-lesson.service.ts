@@ -2,15 +2,22 @@ import { Injectable } from '@angular/core';
 import { Hand } from './Hand';
 import { Card } from './Card';
 import { BidLesson } from './BidLesson';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { map } from  'rxjs/operators';
 
+/*
+* Service to manage bidding lessons
+*/
 @Injectable({
   providedIn: 'root'
 })
 export class BidLessonService {
   lessonCategoryName: string;
   currentLesson: BidLesson;
-
-  constructor() { }
+  lessons: BidLesson[];
+  biddingAPIurl: string = "http://localhost:5000/api/biddings/lessons";
+  constructor(private http: HttpClient) { }
 
   setLessonCategoryName(l:string){
     this.lessonCategoryName = l;
@@ -42,10 +49,17 @@ export class BidLessonService {
     {id: "o2", name: "2 opening", total:1, completion: 0, currentExercise: 0},
     {id: "o3", name: "Barrage", total:1,  completion: 1, currentExercise: 5}];
 
-  getLessonList(): BidLesson[] {
-    // got to backend to get these using the user and category name
-   
-    return this.dataLessons;
+  getLessonList(): Observable<BidLesson[]> {
+    if (this.lessons === undefined) {
+        // got to backend to get these using the user and category name
+        return this.http.get<BidLesson[]>(this.biddingAPIurl + "/" + this.getLessonCategoryName())
+        .pipe(map(
+          data => { this.lessons =  data; return data},
+          error => {console.log("Error to get lessons")}
+        ))
+    } else {
+      return of(this.lessons);
+    }
   }
 
   getCurrentLesson(){

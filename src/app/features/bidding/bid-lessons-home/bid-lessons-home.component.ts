@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BidLessonService} from '../bid-lesson.service';
 
+/**
+ * Present the list of bidding lessons per categories.
+ */
 @Component({
   selector: 'app-bid-lessons-home',
   templateUrl: './bid-lessons-home.component.html',
@@ -18,6 +21,12 @@ export class BidLessonsHomeComponent implements OnInit {
   opening(){
     console.log('Opening setting');
     this.bidService.setLessonCategoryName('Opening');
+    this.router.navigate(['bidLesson']);
+  }
+
+  defense() {
+    console.log('Defense setting');
+    this.bidService.setLessonCategoryName('Defense');
     this.router.navigate(['bidLesson']);
   }
 }

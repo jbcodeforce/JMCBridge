@@ -1,0 +1,11 @@
+[
+    {"id": "o1", 
+    "name": "opening", "nbExercices":2, 
+    "exercises": [
+        {"id":1, "instructions": 
+            [{ "label":"Count your evaluation points before your first bid.", "subPart":"A -> 4H; K -> 3H; Q -> 2H; J -> 1H"},
+             { "label":"Count your HD","subPart":"16 H"}
+            ], 
+        "solution": "1C", 
+        "hand": {"position": "South", "cards":[]}}]}
+]
