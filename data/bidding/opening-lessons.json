@@ -1,11 +1,25 @@
 [
     {"id": "o1", 
-    "name": "opening", "nbExercices":2, 
+    "name": "opening at 1 trick", "nbExercices":2, 
     "exercises": [
         {"id":1, "instructions": 
-            [{ "label":"Count your evaluation points before your first bid.", "subPart":"A -> 4H; K -> 3H; Q -> 2H; J -> 1H"},
-             { "label":"Count your HD","subPart":"16 H"}
+            [{ "label":"Count your honor points before your first bid.", "subPart":"A -> 4H; K -> 3H; Q -> 2H; J -> 1H"},
+             { "label":"Count your distribution point if you have an unregular hand","subPart":"Chicane -> 3D"},
+             { "label":"How many points?","subPart":"17 H"}
             ], 
-        "solution": "1C", 
-        "hand": {"position": "South", "cards":[]}}]}
+        "solution": "1NT", 
+        "hands": [{"position": "South", 
+                "cardsAsString":["AS","KS","QS","7S","KH","TH","8H","5H","KD","QD","5D","9C","7C"]
+                }]
+        },
+        {"id":2, "instructions": 
+            [{ "label":"Look at the distribution", "subPart":"Use Major by 5"}
+            ], 
+        "solution": "1S", 
+        "hands": [{"position": "South", 
+                "cardsAsString":["AS","KS","QS","7S","5S","TH","8H","5H","KD","QD","5D","9C","7C"]
+                }]
+        }
+    ]
+    }
 ]

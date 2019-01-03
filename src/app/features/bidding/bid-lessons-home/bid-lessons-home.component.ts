@@ -20,13 +20,13 @@ export class BidLessonsHomeComponent implements OnInit {
 
   opening(){
     console.log('Opening setting');
-    this.bidService.setLessonCategoryName('Opening');
+    this.bidService.setLessonCategoryName('opening');
     this.router.navigate(['bidLesson']);
   }
 
   defense() {
     console.log('Defense setting');
-    this.bidService.setLessonCategoryName('Defense');
+    this.bidService.setLessonCategoryName('defense');
     this.router.navigate(['bidLesson']);
   }
 }

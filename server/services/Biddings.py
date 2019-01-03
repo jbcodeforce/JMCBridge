@@ -5,6 +5,7 @@ import json
     
 # Return the list of bidding lessons for the given category
 def getLessonsByCategory(category):
-    f = open('../../data/bidding/opening-lessons.json')
+    f = open('../data/bidding/opening-lessons.json')
     l = json.load(f)
+    print(l)
     return l

@@ -73,9 +73,9 @@ export class BidGameComponent implements AfterViewInit {
     this.lesson = this.bidService.getCurrentLesson();
     this.indexExercise = 0; // TODO it should come from user profile
     this.currentExercise = this.lesson.exercises[ this.indexExercise];
-    this.hand=this.currentExercise.hand;
+    this.hand=this.currentExercise.hands[0];
     for( var i = 0; i<13; i++) {
-      this.cardImgSrcs[i]="assets/images/cards/"+this.hand.cards[i].name+".png";
+      this.cardImgSrcs[i]="assets/images/cards/"+this.hand.cards[i].imgSrc+".png";
     }
   }
 
@@ -84,8 +84,17 @@ export class BidGameComponent implements AfterViewInit {
   }
 
   next(){
-    // increase to next exercise
-    this.message = "No more exercice, change lesson by going back to the lessons home page.";
+    this.indexExercise++;
+    if (this.indexExercise <= this.lesson.nbExercices) {
+      this.currentExercise = this.lesson.exercises[ this.indexExercise];
+      this.hand=this.currentExercise.hands[0];
+      for( var i = 0; i<13; i++) {
+        this.cardImgSrcs[i]="assets/images/cards/"+this.hand.cards[i].imgSrc+".png";
+      }
+    } else {
+      this.message = "No more exercice, change lesson by going back to the lessons home page.";
+
+    }
   }
 
   validate(){
@@ -129,7 +138,7 @@ export class BidGameComponent implements AfterViewInit {
     this.context.font="20px Georgia";
     this.context.fillStyle = "white";
     this.context.clearRect(0, 0, 100, 30);
-    this.context.fillText(" S   W  " + "  N   E",5,17);
+    this.context.fillText(" S    W   " + "  N    E",5,17);
    // this.context.fillText("1C   -  " + " 2C   -",5,34);
     if (this.bidValue != 0) {
       this.context.fillText(this.bidValue +  this.colorText[this.bidColor],5,34);

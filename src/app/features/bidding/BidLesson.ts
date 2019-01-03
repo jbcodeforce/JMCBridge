@@ -5,6 +5,6 @@ export class BidLesson {
     name: string = "";
     completion: number = 0;
     currentExercise: number = 0;
-    total: number  = 1;
+    nbExercices: number  = 1;
     exercises?: BidExercise[];
 }

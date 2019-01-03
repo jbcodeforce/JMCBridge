@@ -8,5 +8,5 @@ export class BidExercise {
     id: number = 0 ;
     instructions: instruction[];
     solution: string = "";
-    hand?: Hand;
+    hands?: Hand[];
 }

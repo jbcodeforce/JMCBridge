@@ -137,6 +137,28 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/features/bidding/Card.ts":
+/*!******************************************!*\
+  !*** ./src/app/features/bidding/Card.ts ***!
+  \******************************************/
+/*! exports provided: Card */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Card", function() { return Card; });
+var Card = /** @class */ (function () {
+    function Card() {
+        this.name = "";
+        this.Hpoint = 0;
+    }
+    return Card;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/features/bidding/bid-game/bid-game.component.css":
 /*!******************************************************************!*\
   !*** ./src/app/features/bidding/bid-game/bid-game.component.css ***!
@@ -226,7 +248,7 @@ var BidGameComponent = /** @class */ (function () {
         this.currentExercise = this.lesson.exercises[this.indexExercise];
         this.hand = this.currentExercise.hand;
         for (var i = 0; i < 13; i++) {
-            this.cardImgSrcs[i] = "assets/images/cards/" + this.hand.cards[i].name + ".png";
+            this.cardImgSrcs[i] = "assets/images/cards/" + this.hand.cards[i].imgSrc + ".png";
         }
     }
     BidGameComponent.prototype.back = function () {
@@ -406,9 +428,10 @@ var BidGameComponent = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BidLessonService", function() { return BidLessonService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _Card__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Card */ "./src/app/features/bidding/Card.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -422,10 +445,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+/*
+* Service to manage bidding lessons
+*/
 var BidLessonService = /** @class */ (function () {
     function BidLessonService(http) {
         this.http = http;
-        this.biddingAPIurl = "/api/biddings/lessons";
+        this.biddingAPIurl = "http://localhost:5000/api/biddings/lessons";
         this.dataLessons = [{ id: "o1", name: "1 opening", total: 1, completion: 0, currentExercise: 0,
                 exercises: [{ id: 1,
                         instructions: [{ label: 'Count your evaluation points before your first bid.', subPart: 'A -> 4H; K -> 3H; Q -> 2H; J -> 1H' },
@@ -461,10 +488,13 @@ var BidLessonService = /** @class */ (function () {
         if (this.lessons === undefined) {
             // got to backend to get these using the user and category name
             return this.http.get(this.biddingAPIurl + "/" + this.getLessonCategoryName())
-                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) { _this.lessons = data; return data; }, function (error) { console.log("Error to get lessons"); }));
+                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (data) {
+                _this.lessons = _this.processCards(data);
+                return _this.lessons;
+            }, function (error) { console.log("Error to get lessons"); }));
         }
         else {
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(this.lessons);
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(this.lessons);
         }
     };
     BidLessonService.prototype.getCurrentLesson = function () {
@@ -476,11 +506,40 @@ var BidLessonService = /** @class */ (function () {
     BidLessonService.prototype.setBidLesson = function (lesson) {
         this.currentLesson = lesson;
     };
+    /**
+     * Transform card list from string to cards
+     * @param l
+     */
+    BidLessonService.prototype.processCards = function (l) {
+        l.forEach(function (b) {
+            b.exercises.forEach(function (e) {
+                e.hand.cardsAsString.split(',').forEach(function (c) {
+                    var card = new _Card__WEBPACK_IMPORTED_MODULE_1__["Card"]();
+                    card.name = c;
+                    card.imgSrc = c[0] + "-of-";
+                    if (c[1] == "C") {
+                        card.imgSrc += "CLUBS";
+                    }
+                    if (c[1] == "S") {
+                        card.imgSrc += "SPADES";
+                    }
+                    if (c[1] == "D") {
+                        card.imgSrc += "DIAMONDS";
+                    }
+                    if (c[1] == "H") {
+                        card.imgSrc += "HEARTHS";
+                    }
+                    e.hand.cards.push(card);
+                });
+            });
+        });
+        return l;
+    };
     BidLessonService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], BidLessonService);
     return BidLessonService;
 }());
@@ -553,8 +612,8 @@ var BidLessonsHomeComponent = /** @class */ (function () {
         this.router.navigate(['bidLesson']);
     };
     BidLessonsHomeComponent.prototype.defense = function () {
-        console.log('Opening setting');
-        this.bidService.setLessonCategoryName('defense');
+        console.log('Defense setting');
+        this.bidService.setLessonCategoryName('Defense');
         this.router.navigate(['bidLesson']);
     };
     BidLessonsHomeComponent = __decorate([
@@ -967,15 +1026,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _tilecard_tilecard_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tilecard/tilecard.component */ "./src/app/shared/tilecard/tilecard.component.ts");
-/* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./header/header.component */ "./src/app/shared/header/header.component.ts");
-/* harmony import */ var _footer_footer_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./footer/footer.component */ "./src/app/shared/footer/footer.component.ts");
+/* harmony import */ var ngx_markdown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-markdown */ "./node_modules/ngx-markdown/fesm5/ngx-markdown.js");
+/* harmony import */ var _tilecard_tilecard_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tilecard/tilecard.component */ "./src/app/shared/tilecard/tilecard.component.ts");
+/* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./header/header.component */ "./src/app/shared/header/header.component.ts");
+/* harmony import */ var _footer_footer_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./footer/footer.component */ "./src/app/shared/footer/footer.component.ts");
+/* harmony import */ var _tutorial_dialog_tutorial_dialog_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./tutorial-dialog/tutorial-dialog.component */ "./src/app/shared/tutorial-dialog/tutorial-dialog.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -989,10 +1052,11 @@ var SharedModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+                ngx_markdown__WEBPACK_IMPORTED_MODULE_3__["MarkdownModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatCardModule"]
             ],
-            declarations: [_tilecard_tilecard_component__WEBPACK_IMPORTED_MODULE_3__["TilecardComponent"], _header_header_component__WEBPACK_IMPORTED_MODULE_4__["HeaderComponent"], _footer_footer_component__WEBPACK_IMPORTED_MODULE_5__["FooterComponent"]],
-            exports: [_tilecard_tilecard_component__WEBPACK_IMPORTED_MODULE_3__["TilecardComponent"], _header_header_component__WEBPACK_IMPORTED_MODULE_4__["HeaderComponent"], _footer_footer_component__WEBPACK_IMPORTED_MODULE_5__["FooterComponent"]]
+            declarations: [_tilecard_tilecard_component__WEBPACK_IMPORTED_MODULE_4__["TilecardComponent"], _header_header_component__WEBPACK_IMPORTED_MODULE_5__["HeaderComponent"], _footer_footer_component__WEBPACK_IMPORTED_MODULE_6__["FooterComponent"], _tutorial_dialog_tutorial_dialog_component__WEBPACK_IMPORTED_MODULE_7__["TutorialDialogComponent"]],
+            exports: [_tilecard_tilecard_component__WEBPACK_IMPORTED_MODULE_4__["TilecardComponent"], _header_header_component__WEBPACK_IMPORTED_MODULE_5__["HeaderComponent"], _footer_footer_component__WEBPACK_IMPORTED_MODULE_6__["FooterComponent"]]
         })
     ], SharedModule);
     return SharedModule;
@@ -1102,6 +1166,80 @@ var TilecardComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], TilecardComponent);
     return TilecardComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/tutorial-dialog/tutorial-dialog.component.css":
+/*!**********************************************************************!*\
+  !*** ./src/app/shared/tutorial-dialog/tutorial-dialog.component.css ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/shared/tutorial-dialog/tutorial-dialog.component.html":
+/*!***********************************************************************!*\
+  !*** ./src/app/shared/tutorial-dialog/tutorial-dialog.component.html ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1 mat-dialog-title>{{data.title}}</h1>\n<div mat-dialog-content>\n  <markdown style=\"width=100%; object-fit=contain\" [src]=\"data.urlMdPath\" ngPreserveWhitespaces></markdown>\n</div>\n<div mat-dialog-actions>\n  <button mat-button (click)=\"onDoneClick()\" cdkFocusInitial>Done</button>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/shared/tutorial-dialog/tutorial-dialog.component.ts":
+/*!*********************************************************************!*\
+  !*** ./src/app/shared/tutorial-dialog/tutorial-dialog.component.ts ***!
+  \*********************************************************************/
+/*! exports provided: TutorialDialogComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TutorialDialogComponent", function() { return TutorialDialogComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+var TutorialDialogComponent = /** @class */ (function () {
+    function TutorialDialogComponent(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+    }
+    TutorialDialogComponent.prototype.ngOnInit = function () {
+    };
+    TutorialDialogComponent.prototype.onDoneClick = function () {
+        this.dialogRef.close();
+    };
+    TutorialDialogComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-tutorial-dialog',
+            template: __webpack_require__(/*! ./tutorial-dialog.component.html */ "./src/app/shared/tutorial-dialog/tutorial-dialog.component.html"),
+            styles: [__webpack_require__(/*! ./tutorial-dialog.component.css */ "./src/app/shared/tutorial-dialog/tutorial-dialog.component.css")]
+        }),
+        __param(1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_1__["MAT_DIALOG_DATA"])),
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialogRef"], Object])
+    ], TutorialDialogComponent);
+    return TutorialDialogComponent;
 }());
 
 

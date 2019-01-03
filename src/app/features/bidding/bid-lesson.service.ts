@@ -54,7 +54,8 @@ export class BidLessonService {
         // got to backend to get these using the user and category name
         return this.http.get<BidLesson[]>(this.biddingAPIurl + "/" + this.getLessonCategoryName())
         .pipe(map(
-          data => { this.lessons =  data; return data},
+          data => { this.lessons =  this.processCards(data);            
+                  return this.lessons},
           error => {console.log("Error to get lessons")}
         ))
     } else {
@@ -71,5 +72,36 @@ export class BidLessonService {
 
   setBidLesson(lesson: BidLesson) {
     this.currentLesson = lesson;
+  }
+
+  /**
+   * Transform card list from string to cards
+   * @param l  
+   */
+  processCards(l: BidLesson[]) {
+    l.forEach( (b) => {
+      b.exercises.forEach( e => {
+        e.hands[0].cards=[]
+        e.hands[0].cardsAsString.forEach( c => {
+           let card:Card = new Card();
+           card.name=c;
+           card.imgSrc=c[0]+"-of-";
+           if (c[1] == "C") {
+            card.imgSrc+="CLUBS";
+           }
+           if (c[1] == "S") {
+            card.imgSrc+="SPADES";
+           }
+           if (c[1] == "D") {
+            card.imgSrc+="DIAMONDS";
+           }
+           if (c[1] == "H") {
+            card.imgSrc+="HEARTS";
+           }
+           e.hands[0].cards.push(card);
+        })
+      })
+    } )
+    return l;
   }
 }
