@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MarkdownModule } from 'ngx-markdown'
 import { MatToolbarModule, 
          MatCardModule , 
          MatIconModule, 
@@ -15,6 +16,7 @@ import { BidLessonsHomeComponent } from './bidding/bid-lessons-home/bid-lessons-
 import { BidLessonsComponent } from './bidding/bid-lessons/bid-lessons.component';
 import { BidGameComponent } from './bidding/bid-game/bid-game.component';
 import { BidLessonService } from './bidding/bid-lesson.service';
+import { TutorialReaderComponent } from './tutorial-reader/tutorial-reader.component';
 
 @NgModule({
   imports: [
@@ -24,6 +26,7 @@ import { BidLessonService } from './bidding/bid-lesson.service';
       useHash: true,
       enableTracing: false
       }),
+      MarkdownModule.forRoot(),
       MatToolbarModule,
       MatCardModule,
       MatTableModule,
@@ -32,7 +35,7 @@ import { BidLessonService } from './bidding/bid-lesson.service';
       MatStepperModule,
       MatIconModule
       ],
-  declarations: [HomeComponent, BidLessonsHomeComponent, BidLessonsComponent, BidGameComponent],
+  declarations: [HomeComponent, BidLessonsHomeComponent, BidLessonsComponent, BidGameComponent, TutorialReaderComponent],
   exports: [HomeComponent, BidLessonsHomeComponent, RouterModule],
   providers: [BidLessonService]
 })

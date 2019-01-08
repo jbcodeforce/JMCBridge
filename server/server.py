@@ -12,10 +12,20 @@ def hello():
 
 # For the given user returns the list of lessons available for the given category. 
 @app.route('/api/biddings/lessons/<category>', methods = ['GET'])
+
+
+@app.route('/api/biddings/tutorials/<category>', methods = ['GET'])
 @cross_origin()
-def biddings(category):
+def getTutorialByCategory(category):
     print(category)
-    return jsonify(Biddings.getLessonsByCategory(category))
+    return jsonify(Biddings.getTutorialByCategory(category))
+
+@app.route('/api/biddings/exercises/<category>', methods = ['GET'])
+@cross_origin()
+def getExercisesByCategory(category):
+    print(category)
+    return jsonify(Biddings.getExercisesByCategory(category))
 
 if __name__ == "__main__":
-    app.run()
+    # bind to host to be accessible outside of the container while running in docker
+    app.run(host='0.0.0.0')

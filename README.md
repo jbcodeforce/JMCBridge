@@ -26,6 +26,9 @@ Run `ng build` to build the angular project. The build artifacts will be stored 
 
 To build the Flask application: `python3 server.py`. 
 
+## Deploy
+
+A dockerfile is under server folder. `docker build -t jbcodeforce/jmcbridge .`
 ### Coding tricks
 
 * To use Cors with flask and angular, first integrate [flask-cors module](https://flask-cors.readthedocs.io/en/latest) into the flask server. Use `pip install -U flask-cors` or add to the requirements.txt. 

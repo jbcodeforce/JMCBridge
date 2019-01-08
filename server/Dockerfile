@@ -8,7 +8,7 @@ RUN pip install --no-cache-dir -r requirements.txt \
   && pip install --upgrade pip \
   && pip install --upgrade pipenv
 
-COPY . .
+COPY . /usr/app
 EXPOSE 5000
 ENV FLASK_APP=server.py
 CMD ["python3","server.py"]

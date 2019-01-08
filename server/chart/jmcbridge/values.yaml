@@ -3,8 +3,8 @@
 replicaCount: 1
 revisionHistoryLimit: 1
 image:
-  repository: registry.not-used.net/replace-me-namespace/jmcbridgems
-  tag: v1.0.0
+  repository: jbcodeforce/jmcbridge
+  tag: latest
   pullPolicy: Always
   resources:
     requests:
@@ -16,7 +16,7 @@ livenessProbe:
 service:
   name: python
   type: NodePort
-  servicePort: 3000
+  servicePort: 5000
 hpa:
   enabled: false
   minReplicas: 1

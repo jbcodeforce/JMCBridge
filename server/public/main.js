@@ -177,7 +177,7 @@ module.exports = ".header-spacer {\n flex: 1 1 auto;\n}\n\n.grid-container {\n  
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\"> \n<mat-toolbar style=\" border-bottom: 2px dotted #003300;\">\n  <a (click)=\"back()\"><span><i class=\"header-icon material-icons\">arrow_back</i></span></a>\n  <span class=\"header-spacer\"></span>\n<span>{{lesson.name}}</span>\n</mat-toolbar>\n</div>\n\n<img #c_0 src=\"{{cardImgSrcs[0]}}\" (load)=\"drawCard(0)\" style='display: none;' />\n<img #c_1 src=\"{{cardImgSrcs[1]}}\" (load)=\"drawCard(1)\" style='display: none;' />\n<img #c_2 src=\"{{cardImgSrcs[2]}}\" (load)=\"drawCard(2)\" style='display: none;' />\n<img #c_3 src=\"{{cardImgSrcs[3]}}\" (load)=\"drawCard(3)\" style='display: none;' />\n<img #c_4 src=\"{{cardImgSrcs[4]}}\" (load)=\"drawCard(4)\" style='display: none;' />\n<img #c_5 src=\"{{cardImgSrcs[5]}}\" (load)=\"drawCard(5)\" style='display: none;' />\n<img #c_6 src=\"{{cardImgSrcs[6]}}\" (load)=\"drawCard(6)\" style='display: none;' />\n<img #c_7 src=\"{{cardImgSrcs[7]}}\" (load)=\"drawCard(7)\" style='display: none;' />\n<img #c_8 src=\"{{cardImgSrcs[8]}}\" (load)=\"drawCard(8)\" style='display: none;' />\n<img #c_9 src=\"{{cardImgSrcs[9]}}\" (load)=\"drawCard(9)\" style='display: none;' />\n<img #c_10 src=\"{{cardImgSrcs[10]}}\" (load)=\"drawCard(10)\" style='display: none;' />\n<img #c_11 src=\"{{cardImgSrcs[11]}}\" (load)=\"drawCard(11)\" style='display: none;' />\n<img #c_12 src=\"{{cardImgSrcs[12]}}\" (load)=\"drawCard(12)\" style='display: none;' />\n<img #biddings src=\"assets/images/bidding-cards.png\" (load)=\"drawBidding()\" style='display: none;'/>\n<!-- Use material grid for a 6 rows by 5 columns-->\n<div class=\"grid-container\"> \n    <div class=\"canvasCol\">\n       <canvas #canvas width=\"{{canvasWidth}}\" height=\"{{canvasHeight}}\" style=\"background:#003300;\"></canvas>\n       \n    </div>\n    <div class=\"col\">\n        <mat-vertical-stepper [linear]=\"true\" #stepper>\n            <mat-step *ngFor=\"let inst of currentExercise.instructions\">\n                <ng-template matStepLabel>{{inst.label}}</ng-template>\n                <div>\n                   {{inst.subPart}}\n                </div>\n            </mat-step>\n            <mat-step>\n                <ng-template matStepLabel>Select your bid</ng-template>\n                <div>\n                    <button  mat-icon-button color=\"primary\" (click)=\"validate()\"><mat-icon>looks</mat-icon></button>\n                    <button  mat-icon-button color=\"primary\" (click)=\"next()\"><mat-icon>navigate_next</mat-icon></button>\n                    {{this.message}}\n                </div>\n            </mat-step>\n        </mat-vertical-stepper>\n    </div>\n    <!-- \n    <mat-grid-list cols=\"5\" rowHeight=\"100px\">\n        <mat-grid-tile [colspan]=4 [rowspan]=5>\n            <canvas #canvas width=\"{{canvasWidth}}\" height=\"{{canvasHeight}}\" style=\"background:#003300;\"></canvas>\n        </mat-grid-tile>\n        <mat-grid-tile [colspan]=1 [rowspan]=5>\n            <mat-vertical-stepper [linear]=\"true\" #stepper>\n                <mat-step>\n                  <ng-template matStepLabel>Count you HD points</ng-template>\n                </mat-step>\n                <mat-step>\n                    <ng-template matStepLabel>{{currentExercise.instructions}}</ng-template>\n                </mat-step>\n            </mat-vertical-stepper>\n            \n        </mat-grid-tile>\n        <mat-grid-tile [colspan]=4 [rowspan]=1>\n            <button  mat-icon-button color=\"primary\" (click)=\"validate()\"><mat-icon>looks</mat-icon></button>\n            <button  mat-icon-button color=\"primary\" (click)=\"next()\"><mat-icon>navigate_next</mat-icon></button>\n    \n        </mat-grid-tile>\n    </mat-grid-list>\n-->\n</div>\n\n\n"
+module.exports = "<div class=\"row\"> \n<mat-toolbar style=\" border-bottom: 2px dotted #003300;\">\n  <a (click)=\"back()\"><span><i class=\"header-icon material-icons\">arrow_back</i></span></a>\n  <span class=\"header-spacer\"></span>\n<span>{{lesson.name}}</span>\n</mat-toolbar>\n</div>\n\n<img #c_0 src=\"{{cardImgSrcs[0]}}\" (load)=\"drawCard(0)\" style='display: none;' />\n<img #c_1 src=\"{{cardImgSrcs[1]}}\" (load)=\"drawCard(1)\" style='display: none;' />\n<img #c_2 src=\"{{cardImgSrcs[2]}}\" (load)=\"drawCard(2)\" style='display: none;' />\n<img #c_3 src=\"{{cardImgSrcs[3]}}\" (load)=\"drawCard(3)\" style='display: none;' />\n<img #c_4 src=\"{{cardImgSrcs[4]}}\" (load)=\"drawCard(4)\" style='display: none;' />\n<img #c_5 src=\"{{cardImgSrcs[5]}}\" (load)=\"drawCard(5)\" style='display: none;' />\n<img #c_6 src=\"{{cardImgSrcs[6]}}\" (load)=\"drawCard(6)\" style='display: none;' />\n<img #c_7 src=\"{{cardImgSrcs[7]}}\" (load)=\"drawCard(7)\" style='display: none;' />\n<img #c_8 src=\"{{cardImgSrcs[8]}}\" (load)=\"drawCard(8)\" style='display: none;' />\n<img #c_9 src=\"{{cardImgSrcs[9]}}\" (load)=\"drawCard(9)\" style='display: none;' />\n<img #c_10 src=\"{{cardImgSrcs[10]}}\" (load)=\"drawCard(10)\" style='display: none;' />\n<img #c_11 src=\"{{cardImgSrcs[11]}}\" (load)=\"drawCard(11)\" style='display: none;' />\n<img #c_12 src=\"{{cardImgSrcs[12]}}\" (load)=\"drawCard(12)\" style='display: none;' />\n<img #biddings src=\"assets/images/bidding-cards.png\" (load)=\"drawBidding()\" style='display: none;'/>\n\n<div class=\"grid-container\"> \n    <div class=\"canvasCol\">\n       <canvas #canvas width=\"{{canvasWidth}}\" height=\"{{canvasHeight}}\" style=\"background:#003300;\"></canvas>\n       \n    </div>\n    <div class=\"col\">\n        <mat-vertical-stepper [linear]=\"true\" #stepper>\n            <mat-step *ngFor=\"let inst of currentExercise.instructions\">\n                <ng-template matStepLabel>{{inst.label}}</ng-template>\n                <div>\n                   {{inst.subPart}}\n                </div>\n            </mat-step>\n            <mat-step>\n                <ng-template matStepLabel>Select your bid</ng-template>\n                <div>\n                    <button  mat-icon-button color=\"primary\" (click)=\"validate()\"><mat-icon>looks</mat-icon></button>\n                    <button  mat-icon-button color=\"primary\" (click)=\"next()\"><mat-icon>navigate_next</mat-icon></button>\n                    {{this.message}}\n                </div>\n            </mat-step>\n        </mat-vertical-stepper>\n    </div>\n    <!-- \n    <mat-grid-list cols=\"5\" rowHeight=\"100px\">\n        <mat-grid-tile [colspan]=4 [rowspan]=5>\n            <canvas #canvas width=\"{{canvasWidth}}\" height=\"{{canvasHeight}}\" style=\"background:#003300;\"></canvas>\n        </mat-grid-tile>\n        <mat-grid-tile [colspan]=1 [rowspan]=5>\n            <mat-vertical-stepper [linear]=\"true\" #stepper>\n                <mat-step>\n                  <ng-template matStepLabel>Count you HD points</ng-template>\n                </mat-step>\n                <mat-step>\n                    <ng-template matStepLabel>{{currentExercise.instructions}}</ng-template>\n                </mat-step>\n            </mat-vertical-stepper>\n            \n        </mat-grid-tile>\n        <mat-grid-tile [colspan]=4 [rowspan]=1>\n            <button  mat-icon-button color=\"primary\" (click)=\"validate()\"><mat-icon>looks</mat-icon></button>\n            <button  mat-icon-button color=\"primary\" (click)=\"next()\"><mat-icon>navigate_next</mat-icon></button>\n    \n        </mat-grid-tile>\n    </mat-grid-list>\n-->\n</div>\n\n\n"
 
 /***/ }),
 
@@ -246,7 +246,7 @@ var BidGameComponent = /** @class */ (function () {
         this.lesson = this.bidService.getCurrentLesson();
         this.indexExercise = 0; // TODO it should come from user profile
         this.currentExercise = this.lesson.exercises[this.indexExercise];
-        this.hand = this.currentExercise.hand;
+        this.hand = this.currentExercise.hands[0];
         for (var i = 0; i < 13; i++) {
             this.cardImgSrcs[i] = "assets/images/cards/" + this.hand.cards[i].imgSrc + ".png";
         }
@@ -255,8 +255,18 @@ var BidGameComponent = /** @class */ (function () {
         this.router.navigate(['bidLesson']);
     };
     BidGameComponent.prototype.next = function () {
-        // increase to next exercise
-        this.message = "No more exercice, change lesson by going back to the lessons home page.";
+        this.indexExercise++;
+        if (this.indexExercise <= this.lesson.nbExercices) {
+            this.currentExercise = this.lesson.exercises[this.indexExercise];
+            this.hand = this.currentExercise.hands[0];
+            this.bidValue = 0;
+            for (var i = 0; i < 13; i++) {
+                this.cardImgSrcs[i] = "assets/images/cards/" + this.hand.cards[i].imgSrc + ".png";
+            }
+        }
+        else {
+            this.message = "No more exercice, change lesson by going back to the lessons home page.";
+        }
     };
     BidGameComponent.prototype.validate = function () {
         console.log("Validate the bid match solution");
@@ -293,8 +303,8 @@ var BidGameComponent = /** @class */ (function () {
     BidGameComponent.prototype.drawBiddingText = function () {
         this.context.font = "20px Georgia";
         this.context.fillStyle = "white";
-        this.context.clearRect(0, 0, 100, 30);
-        this.context.fillText(" S   W  " + "  N   E", 5, 17);
+        this.context.clearRect(0, 0, 100, 60);
+        this.context.fillText(" S    W   " + "  N    E", 5, 17);
         // this.context.fillText("1C   -  " + " 2C   -",5,34);
         if (this.bidValue != 0) {
             this.context.fillText(this.bidValue + this.colorText[this.bidColor], 5, 34);
@@ -453,29 +463,6 @@ var BidLessonService = /** @class */ (function () {
     function BidLessonService(http) {
         this.http = http;
         this.biddingAPIurl = "http://localhost:5000/api/biddings/lessons";
-        this.dataLessons = [{ id: "o1", name: "1 opening", total: 1, completion: 0, currentExercise: 0,
-                exercises: [{ id: 1,
-                        instructions: [{ label: 'Count your evaluation points before your first bid.', subPart: 'A -> 4H; K -> 3H; Q -> 2H; J -> 1H' },
-                            { label: 'Count your HD', subPart: '16 H' }],
-                        solution: "1C", hand: { position: "South",
-                            cards: [
-                                { name: "A-of-CLUBS", Hpoint: 4 },
-                                { name: "K-of-CLUBS", Hpoint: 3 },
-                                { name: "T-of-CLUBS", Hpoint: 0 },
-                                { name: "8-of-CLUBS", Hpoint: 0 },
-                                { name: "4-of-CLUBS", Hpoint: 0 },
-                                { name: "8-of-DIAMONDS", Hpoint: 0 },
-                                { name: "7-of-DIAMONDS", Hpoint: 0 },
-                                { name: "4-of-DIAMONDS", Hpoint: 0 },
-                                { name: "A-of-HEARTS", Hpoint: 4 },
-                                { name: "K-of-HEARTS", Hpoint: 3 },
-                                { name: "J-of-HEARTS", Hpoint: 1 },
-                                { name: "A-of-SPADES", Hpoint: 4 },
-                                { name: "T-of-SPADES", Hpoint: 0 }
-                            ] } }]
-            },
-            { id: "o2", name: "2 opening", total: 1, completion: 0, currentExercise: 0 },
-            { id: "o3", name: "Barrage", total: 1, completion: 1, currentExercise: 5 }];
     }
     BidLessonService.prototype.setLessonCategoryName = function (l) {
         this.lessonCategoryName = l;
@@ -498,9 +485,6 @@ var BidLessonService = /** @class */ (function () {
         }
     };
     BidLessonService.prototype.getCurrentLesson = function () {
-        if (this.currentLesson === undefined) {
-            this.currentLesson = this.dataLessons[0];
-        }
         return this.currentLesson;
     };
     BidLessonService.prototype.setBidLesson = function (lesson) {
@@ -513,7 +497,8 @@ var BidLessonService = /** @class */ (function () {
     BidLessonService.prototype.processCards = function (l) {
         l.forEach(function (b) {
             b.exercises.forEach(function (e) {
-                e.hand.cardsAsString.split(',').forEach(function (c) {
+                e.hands[0].cards = [];
+                e.hands[0].cardsAsString.forEach(function (c) {
                     var card = new _Card__WEBPACK_IMPORTED_MODULE_1__["Card"]();
                     card.name = c;
                     card.imgSrc = c[0] + "-of-";
@@ -527,9 +512,9 @@ var BidLessonService = /** @class */ (function () {
                         card.imgSrc += "DIAMONDS";
                     }
                     if (c[1] == "H") {
-                        card.imgSrc += "HEARTHS";
+                        card.imgSrc += "HEARTS";
                     }
-                    e.hand.cards.push(card);
+                    e.hands[0].cards.push(card);
                 });
             });
         });
@@ -608,12 +593,12 @@ var BidLessonsHomeComponent = /** @class */ (function () {
     };
     BidLessonsHomeComponent.prototype.opening = function () {
         console.log('Opening setting');
-        this.bidService.setLessonCategoryName('Opening');
+        this.bidService.setLessonCategoryName('opening');
         this.router.navigate(['bidLesson']);
     };
     BidLessonsHomeComponent.prototype.defense = function () {
         console.log('Defense setting');
-        this.bidService.setLessonCategoryName('Defense');
+        this.bidService.setLessonCategoryName('defense');
         this.router.navigate(['bidLesson']);
     };
     BidLessonsHomeComponent = __decorate([
@@ -650,7 +635,7 @@ module.exports = "table {\nwidth: 100%;\n}\n\n.header-spacer {\nflex: 1 1 auto;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<mat-toolbar>\n    <a (click)=\"back()\"><span><i class=\"header-icon material-icons\">arrow_back</i></span></a>\n    <span class=\"header-spacer\"></span>\n<span>{{title}}</span>\n</mat-toolbar>\n<div class=\"row\">\n    <table mat-table [dataSource]=\"lessons\" matSort class=\"mat-elevation-z8\">\n      <!-- Name Column -->\n      <ng-container matColumnDef=\"name\">\n        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>\n        <mat-cell *matCellDef=\"let element\"> {{element.name}} </mat-cell>\n      </ng-container>\n      <ng-container matColumnDef=\"currentExercise\">\n        <mat-header-cell *matHeaderCellDef mat-sort-header> Current Exercise </mat-header-cell>\n        <mat-cell *matCellDef=\"let element\"> {{element.currentExercise}} </mat-cell>\n      </ng-container>\n      <ng-container matColumnDef=\"total\">\n          <mat-header-cell *matHeaderCellDef mat-sort-header> Number of Exercises </mat-header-cell>\n          <mat-cell *matCellDef=\"let element\"> {{element.total}} </mat-cell>\n        </ng-container>\n      <ng-container matColumnDef=\"completion\">\n        <mat-header-cell *matHeaderCellDef mat-sort-header> Completion </mat-header-cell>\n        <mat-cell *matCellDef=\"let element\"> {{element.completion}} </mat-cell>\n      </ng-container>\n      <!-- Actions Column -->\n      <ng-container matColumnDef=\"actions\">\n        <mat-header-cell *matHeaderCellDef>\n  \n        </mat-header-cell>\n        <mat-cell *matCellDef=\"let element\">\n          <button *ngIf=\"element.completion !== 1\" mat-icon-button color=\"primary\" (click)=\"open(element)\"><mat-icon>play_arrow</mat-icon></button>\n          <button *ngIf=\"element.completion === 1\" mat-icon-button color=\"primary\"><mat-icon>done</mat-icon></button>\n       \n        </mat-cell>\n      </ng-container>\n  \n      <mat-header-row *matHeaderRowDef=\"displayedColumns\"></mat-header-row>\n      <mat-row *matRowDef=\"let row; columns: displayedColumns;\"></mat-row>\n    </table>\n  </div>"
+module.exports = "\n<mat-toolbar>\n    <a (click)=\"back()\"><span><i class=\"header-icon material-icons\">arrow_back</i></span></a>\n    <span class=\"header-spacer\"></span>\n<span>{{title}}</span>\n</mat-toolbar>\n<div class=\"row\">\n    <table mat-table [dataSource]=\"lessons\" matSort class=\"mat-elevation-z8\">\n      <!-- Name Column -->\n      <ng-container matColumnDef=\"name\">\n        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>\n        <mat-cell *matCellDef=\"let element\"> {{element.name}} </mat-cell>\n      </ng-container>\n      <ng-container matColumnDef=\"currentExercise\">\n        <mat-header-cell *matHeaderCellDef mat-sort-header> Current Exercise </mat-header-cell>\n        <mat-cell *matCellDef=\"let element\"> {{element.currentExercise}} </mat-cell>\n      </ng-container>\n      <ng-container matColumnDef=\"total\">\n          <mat-header-cell *matHeaderCellDef mat-sort-header> Number of Exercises </mat-header-cell>\n          <mat-cell *matCellDef=\"let element\"> {{element.nbExercices}} </mat-cell>\n        </ng-container>\n      <ng-container matColumnDef=\"completion\">\n        <mat-header-cell *matHeaderCellDef mat-sort-header> Completion </mat-header-cell>\n        <mat-cell *matCellDef=\"let element\"> {{element.completion}} </mat-cell>\n      </ng-container>\n      <!-- Actions Column -->\n      <ng-container matColumnDef=\"actions\">\n        <mat-header-cell *matHeaderCellDef>\n  \n        </mat-header-cell>\n        <mat-cell *matCellDef=\"let element\">\n          <button *ngIf=\"element.completion !== 1\" mat-icon-button color=\"primary\" (click)=\"open(element)\"><mat-icon>play_arrow</mat-icon></button>\n          <button *ngIf=\"element.completion === 1\" mat-icon-button color=\"primary\"><mat-icon>done</mat-icon></button>\n       \n        </mat-cell>\n      </ng-container>\n  \n      <mat-header-row *matHeaderRowDef=\"displayedColumns\"></mat-header-row>\n      <mat-row *matRowDef=\"let row; columns: displayedColumns;\"></mat-row>\n    </table>\n  </div>"
 
 /***/ }),
 

@@ -5,7 +5,26 @@
 <span>{{title}}</span>
 </mat-toolbar>
 <div class="row">
-    <table mat-table [dataSource]="lessons" matSort class="mat-elevation-z8">
+    <h3>Tutorials</h3>
+    <table mat-table [dataSource]="tutorials" matSort class="mat-elevation-z8">
+       <!-- Name Column -->
+       <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+        <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button *ngIf="element.completion !== 1" mat-icon-button color="primary" (click)="learn(element)"><mat-icon>play_arrow</mat-icon></button>
+           </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="tutDisplayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: tutDisplayedColumns;"></mat-row>
+    </table>
+    <h3>Exercises</h3>
+    <table mat-table [dataSource]="exercices" matSort class="mat-elevation-z8">
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
@@ -35,7 +54,7 @@
         </mat-cell>
       </ng-container>
   
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <mat-header-row *matHeaderRowDef="exoDisplayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: exoDisplayedColumns;"></mat-row>
     </table>
   </div>
