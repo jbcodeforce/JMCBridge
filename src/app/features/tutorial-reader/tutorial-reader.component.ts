@@ -22,4 +22,8 @@ export class TutorialReaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  back(){
+    this.router.navigate(['']);
+  }
+
 }

@@ -13,21 +13,17 @@ import { Tutorial } from '../../tutorial-reader/Tutorial';
 })
 export class BidLessonsComponent implements OnInit {
   
-  exercises: BidLesson[];
+  lessons: BidLesson[];
   title: string;
-  tutorials: Tutorial[];
   tutDisplayedColumns: string[] = ['name', 'actions'];
-  exoDisplayedColumns: string[] = ['name','currentExercise','total','completion', 'actions'];
+  exoDisplayedColumns: string[] = ['name','currentExercise','completion', 'actions'];
+  
   constructor(private router: Router,
     private bidService: BidLessonService) {
       this.title = this.bidService.getLessonCategoryName();
-      this.bidService.getTutorialList().subscribe(
+      this.bidService.getLessonList().subscribe(
         data => {
-          this.tutorials = data;
-        });
-      this.bidService.getExerciseList().subscribe(
-        data => {
-          this.exercises = data;
+          this.lessons = data;
         });
   }
 

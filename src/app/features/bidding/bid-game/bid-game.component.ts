@@ -85,7 +85,7 @@ export class BidGameComponent implements AfterViewInit {
 
   next(){
     this.indexExercise++;
-    if (this.indexExercise <= this.lesson.nbExercices) {
+    if (this.indexExercise <= this.lesson.exercises.length) {
       this.currentExercise = this.lesson.exercises[ this.indexExercise];
       this.hand=this.currentExercise.hands[0];
       this.bidValue=0;

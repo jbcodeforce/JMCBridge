@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BidLessonService} from '../bid-lesson.service';
 
 /**
- * Present the list of bidding lessons per categories.
+ * Present the list of bidding lessons per category. A category could be opening, defense, responses...
  */
 @Component({
   selector: 'app-bid-lessons-home',

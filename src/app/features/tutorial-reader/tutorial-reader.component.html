@@ -1,4 +1,7 @@
-<h2>
-  {{tutorial.name}}
-</h2>
+
+<mat-toolbar>
+    <a (click)="back()"><span><i class="header-icon material-icons">arrow_back</i></span></a>
+    <span class="header-spacer"></span>
+<span>{{tutorial.name}}</span>
+</mat-toolbar>
 <markdown style="width=100%; object-fit=contain" [src]="tutorial.urlMDPath" ngPreserveWhitespaces></markdown>

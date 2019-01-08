@@ -28,28 +28,14 @@ export class BidLessonService {
     return  this.lessonCategoryName;
   }
 
-  getTutorialList(): Observable<Tutorial[]> {
-    if (this.tutorials === undefined) {
-        // got to backend to get these using the user and category name
-        return this.http.get<Tutorial[]>(this.biddingAPIurl + "tutorials/" + this.getLessonCategoryName())
-        .pipe(map(
-          data => { this.tutorials =  data;            
-                  return this.tutorials},
-          error => {console.log("Error to get lessons " + error)}
-        ))
-    } else {
-      return of(this.tutorials);
-    }
-  }
-
-  getExerciseList(): Observable<BidLesson[]> {
+  getLessonList(): Observable<BidLesson[]> {
     if (this.lessons === undefined) {
         // got to backend to get these using the user and category name
-        return this.http.get<BidLesson[]>(this.biddingAPIurl + "exercises/" + this.getLessonCategoryName())
+        return this.http.get<BidLesson[]>(this.biddingAPIurl + "lessons/" + this.getLessonCategoryName())
         .pipe(map(
-          data => { this.lessons =  this.processCards(data);            
+          data => { this.lessons =  data;            
                   return this.lessons},
-          error => {console.log("Error to get exercices " + error)}
+          error => {console.log("Error to get lessons " + error)}
         ))
     } else {
       return of(this.lessons);
