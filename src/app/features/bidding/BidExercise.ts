@@ -6,7 +6,9 @@ interface instruction {
 }
 export class BidExercise {
     id: number = 0 ;
+    name: string = "";
     instructions: instruction[];
     solution: string = "";
+    completion?: boolean = false;
     hands?: Hand[];
 }

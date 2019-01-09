@@ -2,6 +2,11 @@
 <mat-toolbar>
     <a (click)="back()"><span><i class="header-icon material-icons">arrow_back</i></span></a>
     <span class="header-spacer"></span>
-<span>{{tutorial.name}}</span>
 </mat-toolbar>
-<markdown style="width=100%; object-fit=contain" [src]="tutorial.urlMDPath" ngPreserveWhitespaces></markdown>
+<markdown style="width=100%; object-fit=contain" [src]="fileName" ngPreserveWhitespaces></markdown>
+<div class="row button-pad">
+    <div mat-dialog-actions>
+          <button *ngIf="! first()" mat-button (click)="previous()" >Previous</button>
+          <button *ngIf="! last()" style="padding: 10 px;" mat-button (click)="next()" cdkFocusInitial>Next</button>
+    </div>
+</div>

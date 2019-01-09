@@ -16,8 +16,7 @@ export class BidLessonService {
   lessonCategoryName: string;
   currentTutorial: Tutorial;
   currentLesson: BidLesson;
-  lessons: BidLesson[];
-  tutorials: Tutorial[];
+  lessons: BidLesson;
   biddingAPIurl: string = "http://localhost:5000/api/biddings/";
   constructor(private http: HttpClient) { }
 
@@ -28,10 +27,10 @@ export class BidLessonService {
     return  this.lessonCategoryName;
   }
 
-  getLessonList(): Observable<BidLesson[]> {
+  getLessonList(): Observable<BidLesson> {
     if (this.lessons === undefined) {
         // got to backend to get these using the user and category name
-        return this.http.get<BidLesson[]>(this.biddingAPIurl + "lessons/" + this.getLessonCategoryName())
+        return this.http.get<BidLesson>(this.biddingAPIurl + "lessons/" + this.getLessonCategoryName())
         .pipe(map(
           data => { this.lessons =  data;            
                   return this.lessons},

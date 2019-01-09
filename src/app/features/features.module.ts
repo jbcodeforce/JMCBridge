@@ -13,7 +13,7 @@ import { SharedModule } from '../shared/shared.module';
 import { routes } from './routes';
 import { HomeComponent } from './home/home.component';
 import { BidLessonsHomeComponent } from './bidding/bid-lessons-home/bid-lessons-home.component';
-import { BidLessonsComponent } from './bidding/bid-lessons/bid-lessons.component';
+import { BidLessonComponent } from './bidding/bid-lesson/bid-lesson.component';
 import { BidGameComponent } from './bidding/bid-game/bid-game.component';
 import { BidLessonService } from './bidding/bid-lesson.service';
 import { TutorialReaderComponent } from './tutorial-reader/tutorial-reader.component';
@@ -35,7 +35,7 @@ import { TutorialReaderComponent } from './tutorial-reader/tutorial-reader.compo
       MatStepperModule,
       MatIconModule
       ],
-  declarations: [HomeComponent, BidLessonsHomeComponent, BidLessonsComponent, BidGameComponent, TutorialReaderComponent],
+  declarations: [HomeComponent, BidLessonsHomeComponent, BidLessonComponent, BidGameComponent, TutorialReaderComponent],
   exports: [HomeComponent, BidLessonsHomeComponent, RouterModule],
   providers: [BidLessonService]
 })

@@ -1,12 +1,12 @@
 
-<mat-toolbar>
+<mat-toolbar *ngIf="! selectedTutorial">
     <a (click)="back()"><span><i class="header-icon material-icons">arrow_back</i></span></a>
     <span class="header-spacer"></span>
 <span>{{title}}</span>
 </mat-toolbar>
-<div class="row">
+<div class="row" *ngIf="! selectedTutorial">
     <h3>Tutorials</h3>
-    <table mat-table [dataSource]="lessons.tutorials" matSort class="mat-elevation-z8">
+    <table mat-table [dataSource]="lesson.tutorials" matSort class="mat-elevation-z8">
        <!-- Name Column -->
        <ng-container matColumnDef="name">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
@@ -24,22 +24,18 @@
         <mat-row *matRowDef="let row; columns: tutDisplayedColumns;"></mat-row>
     </table>
     <h3>Exercises</h3>
-    <table mat-table [dataSource]="lessons.exercices" matSort class="mat-elevation-z8">
+    <table mat-table [dataSource]="lesson.exercises" matSort class="mat-elevation-z8">
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="currentExercise">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Current Exercise </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.currentExercise}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="completion">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Completion </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.completion}} </mat-cell>
       </ng-container>
       <!-- Actions Column -->
-      <ng-container matColumnDef="actions">
+      <ng-container matColumnDef="actions2">
         <mat-header-cell *matHeaderCellDef>
   
         </mat-header-cell>
@@ -53,4 +49,7 @@
       <mat-header-row *matHeaderRowDef="exoDisplayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: exoDisplayedColumns;"></mat-row>
     </table>
+  </div>
+  <div class="row" *ngIf="selectedTutorial">
+    <app-tutorial-reader [tutorial]="selectedTutorial" [urlBack]="'bidLesson'"></app-tutorial-reader>
   </div>
