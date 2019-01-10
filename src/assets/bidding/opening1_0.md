@@ -21,16 +21,20 @@ The distribution is one of {4,4,3,2} or { 4,3,3,3} or { 5, 3, 3, 2}
 ### Irregular Hand
 The rest.
 
-For irregular hand count the number of cards in each color, and adds up the distribution
+For irregular hand, count the number of cards in each color, and adds up the distribution points
 
  | Number of Cards | D |
  | --- | --- |  
  | No card | 3 D |  
  | One card | 2 D |  
+ | Two cards | 1 D |  
  | 6th card  | 1 D |  
 
-## Open at level 1 from 12H/13DH to 23DH
-If not pass.
+> Points DH = points H + points D
+
+## Open at level 1 from 12H or 14DH to 23DH
+
+If not Pass.
 
 
 

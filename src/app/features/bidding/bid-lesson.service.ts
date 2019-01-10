@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Hand } from './Hand';
 import { Card } from './Card';
 import { BidLesson } from './BidLesson';
+import { BidExercise } from './BidExercise';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map } from  'rxjs/operators';
@@ -15,9 +16,10 @@ import { Tutorial } from '../tutorial-reader/Tutorial';
 export class BidLessonService {
   lessonCategoryName: string;
   currentTutorial: Tutorial;
-  currentLesson: BidLesson;
-  lessons: BidLesson;
+  currentExercise: BidExercise;
+  lesson: BidLesson;
   biddingAPIurl: string = "http://localhost:5000/api/biddings/";
+  
   constructor(private http: HttpClient) { }
 
   setLessonCategoryName(l:string){
@@ -27,26 +29,31 @@ export class BidLessonService {
     return  this.lessonCategoryName;
   }
 
-  getLessonList(): Observable<BidLesson> {
-    if (this.lessons === undefined) {
+  getLesson(): Observable<BidLesson> {
+    if (this.lesson === undefined) {
         // got to backend to get these using the user and category name
         return this.http.get<BidLesson>(this.biddingAPIurl + "lessons/" + this.getLessonCategoryName())
         .pipe(map(
-          data => { this.lessons =  data;            
-                  return this.lessons},
-          error => {console.log("Error to get lessons " + error)}
+          data => { this.lesson =  data;            
+                  return this.lesson},
+          error => {console.log("Error to get lesson " + error)}
         ))
     } else {
-      return of(this.lessons);
+      return of(this.lesson);
     }
   }
 
   getCurrentLesson(){
-    return this.currentLesson;
+    return this.lesson;
   }
 
-  setBidLesson(lesson: BidLesson) {
-    this.currentLesson = lesson;
+  setBidExercise(exo: BidExercise) {
+    this.currentExercise = exo;
+    this.processCards(exo);
+  }
+
+  getBidExercise() {
+    return this.currentExercise;
   }
 
   setTutorial(tutorial: Tutorial){
@@ -57,9 +64,7 @@ export class BidLessonService {
    * Transform card list from string to cards
    * @param l  
    */
-  processCards(l: BidLesson[]) {
-    l.forEach( (b) => {
-      b.exercises.forEach( e => {
+  processCards(e: BidExercise) {
         e.hands[0].cards=[]
         e.hands[0].cardsAsString.forEach( c => {
            let card:Card = new Card();
@@ -79,8 +84,6 @@ export class BidLessonService {
            }
            e.hands[0].cards.push(card);
         })
-      })
-    } )
-    return l;
+    return e;
   }
 }

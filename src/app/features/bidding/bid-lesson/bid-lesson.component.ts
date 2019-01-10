@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BidLessonService} from '../bid-lesson.service';
 import { BidLesson } from '../BidLesson';
+import { BidExercise } from '../BidExercise';
+
 import { Tutorial } from '../../tutorial-reader/Tutorial';
 /**
  * Present a list of bidding lessons, in table format, according to the category selected
@@ -23,7 +25,7 @@ export class BidLessonComponent implements OnInit {
   constructor(private router: Router,
     private bidService: BidLessonService) {
       this.title = this.bidService.getLessonCategoryName();
-      this.bidService.getLessonList().subscribe(
+      this.bidService.getLesson().subscribe(
         data => {
           this.lesson = data;
         });
@@ -36,9 +38,13 @@ export class BidLessonComponent implements OnInit {
     this.router.navigate(['bidLessonHome']);
   }
 
-  open(element:BidLesson){
+  closeTutorial(done:boolean) {
+    this.selectedTutorial = null;
+  }
+
+  open(element: BidExercise){
     console.log("open " + JSON.stringify(element));
-    this.bidService.setBidLesson(element);
+    this.bidService.setBidExercise(element);
     this.router.navigate(['bidGame']);
   }
 

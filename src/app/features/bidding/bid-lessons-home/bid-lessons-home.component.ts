@@ -18,6 +18,7 @@ export class BidLessonsHomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  
   opening(){
     console.log('Opening setting');
     this.bidService.setLessonCategoryName('opening');

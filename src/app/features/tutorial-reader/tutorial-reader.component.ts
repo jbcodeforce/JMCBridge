@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Tutorial } from './Tutorial';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tutorial-reader',
@@ -11,13 +10,13 @@ export class TutorialReaderComponent implements OnInit {
 
   @Input()
   tutorial: Tutorial;
-  @Input()
-  urlBack: string;
+  @Output()
+  doneReading = new EventEmitter<boolean>();
 
   fileName: string;
   index: number = 0;
 
-  constructor(private router: Router) {
+  constructor() {
     
   }
   
@@ -31,7 +30,7 @@ export class TutorialReaderComponent implements OnInit {
   }
 
   back(){
-    this.router.navigate([this.urlBack]);
+    this.doneReading.emit(true);
   }
 
   next(){

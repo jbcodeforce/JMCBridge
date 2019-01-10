@@ -41,8 +41,6 @@
         </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <button *ngIf="element.completion !== 1" mat-icon-button color="primary" (click)="open(element)"><mat-icon>play_arrow</mat-icon></button>
-          <button *ngIf="element.completion === 1" mat-icon-button color="primary"><mat-icon>done</mat-icon></button>
-       
         </mat-cell>
       </ng-container>
   
@@ -51,5 +49,5 @@
     </table>
   </div>
   <div class="row" *ngIf="selectedTutorial">
-    <app-tutorial-reader [tutorial]="selectedTutorial" [urlBack]="'bidLesson'"></app-tutorial-reader>
+    <app-tutorial-reader [tutorial]="selectedTutorial" (doneReading)="closeTutorial($event)"></app-tutorial-reader>
   </div>

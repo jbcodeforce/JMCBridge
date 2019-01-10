@@ -70,9 +70,8 @@ export class BidGameComponent implements AfterViewInit {
    */
   constructor(private router: Router,
     private bidService: BidLessonService) { 
-    this.lesson = this.bidService.getCurrentLesson();
-    this.indexExercise = 0; // TODO it should come from user profile
-    this.currentExercise = this.lesson.exercises[ this.indexExercise];
+    this.currentExercise = this.bidService.getBidExercise();
+    this.lesson = this.bidService.lesson;
     this.hand=this.currentExercise.hands[0];
     for( var i = 0; i<13; i++) {
       this.cardImgSrcs[i]="assets/images/cards/"+this.hand.cards[i].imgSrc+".png";
@@ -91,12 +90,11 @@ export class BidGameComponent implements AfterViewInit {
       this.bidValue=0;
       for( var i = 0; i<13; i++) {
         this.cardImgSrcs[i]="assets/images/cards/"+this.hand.cards[i].imgSrc+".png";
-        
       }
     } else {
       this.message = "No more exercice, change lesson by going back to the lessons home page.";
-
     }
+    this.ngAfterViewInit();
   }
 
   validate(){
@@ -131,7 +129,7 @@ export class BidGameComponent implements AfterViewInit {
     let element: HTMLImageElement = this.cardImgs.get("c_"+ref).nativeElement;
     this.context.drawImage(element, 
     this.canvasWidth / 2 - 7 * cardXStep + ref * cardXStep,
-    this.canvasHeight- this.cardHeight - 20 , 
+    this.canvasHeight - this.cardHeight - 20 , 
     this.cardWidth, this.cardHeight);
     this.drawBiddingText();
   }
