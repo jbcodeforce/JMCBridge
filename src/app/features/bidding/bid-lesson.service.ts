@@ -25,6 +25,7 @@ export class BidLessonService {
   setLessonCategoryName(l:string){
     this.lessonCategoryName = l;
   }
+  
   getLessonCategoryName(){
     return  this.lessonCategoryName;
   }

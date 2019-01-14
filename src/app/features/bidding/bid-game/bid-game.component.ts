@@ -8,8 +8,8 @@ import { BidLesson } from '../BidLesson';
 import { BidExercise } from '../BidExercise';
 
 /**
- * Present the Bidding Game: the bottom part has the 13 cards of the player so he can bid
- * The top left has the current bidding, the right bottom the potential bid to select
+ * Present the Bidding Game: the bottom part presents the 13 cards of the player so he can bid.
+ * The top left has the current bidding sequence, the right bottom the potential bid to select from
  * The right column has principles for the tutorial and explanation for the solution
  */
 @Component({
@@ -35,7 +35,7 @@ export class BidGameComponent implements AfterViewInit {
   @ViewChild('c_12') c_12: ElementRef;
   @ViewChild('biddings') biddingImg: ElementRef;
 
-  private context: CanvasRenderingContext2D;
+  private canvasContext: CanvasRenderingContext2D;
   canvasWidth: number = 1000;
   canvasHeight: number = 500;
   cardWidth: number = 85;
@@ -71,7 +71,9 @@ export class BidGameComponent implements AfterViewInit {
   constructor(private router: Router,
     private bidService: BidLessonService) { 
     this.currentExercise = this.bidService.getBidExercise();
-    this.lesson = this.bidService.lesson;
+    this.bidService.getLesson().subscribe(data => {
+      this.lesson = data;
+    });
     this.hand=this.currentExercise.hands[0];
     for( var i = 0; i<13; i++) {
       this.cardImgSrcs[i]="assets/images/cards/"+this.hand.cards[i].imgSrc+".png";
@@ -82,10 +84,12 @@ export class BidGameComponent implements AfterViewInit {
     this.router.navigate(['bidLesson']);
   }
 
+  // Go to the next exercise of the current lesson
   next(){
     this.indexExercise++;
     if (this.indexExercise <= this.lesson.exercises.length) {
       this.currentExercise = this.lesson.exercises[ this.indexExercise];
+      this.bidService.processCards(this.currentExercise);
       this.hand=this.currentExercise.hands[0];
       this.bidValue=0;
       for( var i = 0; i<13; i++) {
@@ -94,7 +98,7 @@ export class BidGameComponent implements AfterViewInit {
     } else {
       this.message = "No more exercice, change lesson by going back to the lessons home page.";
     }
-    this.ngAfterViewInit();
+    this.drawTable();
   }
 
   validate(){
@@ -107,7 +111,7 @@ export class BidGameComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.context = this.canvas.nativeElement.getContext("2d");
+    this.canvasContext = this.canvas.nativeElement.getContext("2d");
     this.cardImgs.set("c_0",this.c_0);
     this.cardImgs.set("c_1",this.c_1);
     this.cardImgs.set("c_2",this.c_2);
@@ -122,31 +126,42 @@ export class BidGameComponent implements AfterViewInit {
     this.cardImgs.set("c_11",this.c_11);
     this.cardImgs.set("c_12",this.c_12);
     this.captureEvents(this.canvas.nativeElement);
+    this.drawTable();
+  }
+
+  drawTable(){
+    if (this.canvasContext) {
+      this.canvasContext.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+      for (var i = 0; i < 13; i++) {
+        this.drawCard(i)
+      }
+      this.drawBiddingText();
+      this.drawBidding();
+    }
   }
 
   drawCard(ref:number) { 
     let cardXStep: number = 25;
     let element: HTMLImageElement = this.cardImgs.get("c_"+ref).nativeElement;
-    this.context.drawImage(element, 
+    this.canvasContext.drawImage(element, 
     this.canvasWidth / 2 - 7 * cardXStep + ref * cardXStep,
     this.canvasHeight - this.cardHeight - 20 , 
     this.cardWidth, this.cardHeight);
-    this.drawBiddingText();
   }
 
   drawBiddingText(){
-    this.context.font="20px Georgia";
-    this.context.fillStyle = "white";
-    this.context.clearRect(0, 0, 100, 60);
-    this.context.fillText(" S    W   " + "  N    E",5,17);
+    this.canvasContext.font="20px Georgia";
+    this.canvasContext.fillStyle = "white";
+    this.canvasContext.clearRect(0, 0, 100, 60);
+    this.canvasContext.fillText(" S    W   " + "  N    E",5,17);
    // this.context.fillText("1C   -  " + " 2C   -",5,34);
     if (this.bidValue != 0) {
-      this.context.fillText(this.bidValue +  this.colorText[this.bidColor],5,34);
+      this.canvasContext.fillText(this.bidValue +  this.colorText[this.bidColor],5,34);
     }
-    this.context.fillText("North", 420,20);
-    this.context.fillText("South", 420,270);
-    this.context.fillText("East", 650,150);
-    this.context.fillText("West", 30,150);
+    this.canvasContext.fillText("North", 420,20);
+    this.canvasContext.fillText("South", 420,270);
+    this.canvasContext.fillText("East", 650,150);
+    this.canvasContext.fillText("West", 30,150);
   }
 
   /**
@@ -154,29 +169,29 @@ export class BidGameComponent implements AfterViewInit {
    * previous bid
    */
   drawBidding(){
-    this.context.drawImage(this.biddingImg.nativeElement,
+    this.canvasContext.drawImage(this.biddingImg.nativeElement,
         this.biddingX,
         this.biddingY,
         this.biddingWidth,
         this.biddingHeight);
-    let color =  this.context.fillStyle;
-    this.context.fillStyle = "#003300";
+    let color =  this.canvasContext.fillStyle;
+    this.canvasContext.fillStyle = "#003300";
     
     for (let i = 0;i<this.bidValue;i++) {
-      this.context.fillRect( 
+      this.canvasContext.fillRect( 
         this.biddingX, 
         this.biddingY,
         this.biddingXStep * 5,
         i * this.biddingYStep
         );
     }
-    this.context.fillRect( 
+    this.canvasContext.fillRect( 
       this.biddingX + this.biddingXStep * (4 - this.bidColor), 
       this.biddingY,
       this.biddingXStep * (1 + this.bidColor) ,
       this.bidValue * this.biddingYStep
     );
-    this.context.fillStyle = color;
+    this.canvasContext.fillStyle = color;
   }
 
 

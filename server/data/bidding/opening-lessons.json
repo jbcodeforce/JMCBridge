@@ -25,7 +25,7 @@
             ], 
         "solution": "1S", 
         "hands": [{"position": "South", 
-                "cardsAsString":["AS","KS","QS","7S","5S","TH","8H","5H","KD","QD","5D","9C","7C"]
+                "cardsAsString":["AS","KS","QS","7S","5S","TH","7H","3H","KD","JD","4D","8C","6C"]
                 }]
         }
     ]
