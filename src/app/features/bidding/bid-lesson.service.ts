@@ -8,13 +8,14 @@ import { Observable, of } from 'rxjs';
 import { map } from  'rxjs/operators';
 import { Tutorial } from '../tutorial-reader/Tutorial';
 /*
-* Service to manage bidding lessons
+* Service to manage bidding lessons and support sharing data between 
+sibbling components
 */
 @Injectable({
   providedIn: 'root'
 })
 export class BidLessonService {
-  lessonCategoryName: string;
+  lessonCategoryName: string;  // opening or defense, or... will match a json document
   currentTutorial: Tutorial;
   currentExercise: BidExercise;
   lesson: BidLesson;
@@ -32,7 +33,7 @@ export class BidLessonService {
 
   getLesson(): Observable<BidLesson> {
     if (this.lesson === undefined) {
-        // got to backend to get these using the user and category name
+        // get these using the user and category name
         return this.http.get<BidLesson>(this.biddingAPIurl + "lessons/" + this.getLessonCategoryName())
         .pipe(map(
           data => { this.lesson =  data;            
@@ -62,8 +63,11 @@ export class BidLessonService {
   }
 
   /**
-   * Transform card list from string to cards
-   * @param l  
+   * In the Bid exercice the list of card is an array of strings
+   * ["AS","KS","QS","7S....
+   * The second letter represents the color of the card. 
+   * Transform string list to a card list
+   * @param list of cards
    */
   processCards(e: BidExercise) {
         e.hands[0].cards=[]

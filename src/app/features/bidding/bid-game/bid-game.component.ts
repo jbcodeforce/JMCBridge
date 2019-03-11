@@ -8,9 +8,10 @@ import { BidLesson } from '../BidLesson';
 import { BidExercise } from '../BidExercise';
 
 /**
- * Present the Bidding Game: the bottom part presents the 13 cards of the player so he can bid.
+ * Present the Bidding Game: the bottom part presents the 13 cards of the player he will use
+ * to bid.
  * The top left has the current bidding sequence, the right bottom the potential bid to select from
- * The right column has principles for the tutorial and explanation for the solution
+ * The right column has principles for the exercises and explanation for the solution
  */
 @Component({
   selector: 'app-bid-game',
@@ -48,7 +49,8 @@ export class BidGameComponent implements AfterViewInit {
   biddingXStep: number =23;
   biddingYStep: number = 15;
   colorText: string[] = [ "C","D","H","S","NT"];
-  // keep reference to each image html element to be used for drawing
+  // keep reference to each image html element to be used for drawing. The key is
+  // the card code c_* of the player's cards
   cardImgs = new Map<string,ElementRef>();
   // 13 images may have different image card
   cardImgSrcs: string[] =[];
@@ -59,22 +61,27 @@ export class BidGameComponent implements AfterViewInit {
   currentExercise : BidExercise;
   message: string = "";
   indexExercise: number = 0;
-  // what use select with the mouse
+  // what user selected with the mouse
   bidValue: number = 0;
   bidColor: number = 0;
 
   /**
-   * Get the current lesson and exercise to process in this game
+   * Get the current lesson with tutoials and exercises to process in this game
    * @param router 
-   * @param bidService 
+   * @param bidService to access to backend
    */
   constructor(private router: Router,
     private bidService: BidLessonService) { 
+    // need to know which exercice was selected from the lesson page as a lesson has mutliple exercise
     this.currentExercise = this.bidService.getBidExercise();
     this.bidService.getLesson().subscribe(data => {
       this.lesson = data;
     });
     this.hand=this.currentExercise.hands[0];
+    this.loadCardImageNames();
+  }
+
+  loadCardImageNames(){
     for( var i = 0; i<13; i++) {
       this.cardImgSrcs[i]="assets/images/cards/"+this.hand.cards[i].imgSrc+".png";
     }
@@ -92,9 +99,7 @@ export class BidGameComponent implements AfterViewInit {
       this.bidService.processCards(this.currentExercise);
       this.hand=this.currentExercise.hands[0];
       this.bidValue=0;
-      for( var i = 0; i<13; i++) {
-        this.cardImgSrcs[i]="assets/images/cards/"+this.hand.cards[i].imgSrc+".png";
-      }
+      this.loadCardImageNames();
     } else {
       this.message = "No more exercice, change lesson by going back to the lessons home page.";
     }
@@ -143,10 +148,14 @@ export class BidGameComponent implements AfterViewInit {
   drawCard(ref:number) { 
     let cardXStep: number = 25;
     let element: HTMLImageElement = this.cardImgs.get("c_"+ref).nativeElement;
-    this.canvasContext.drawImage(element, 
-    this.canvasWidth / 2 - 7 * cardXStep + ref * cardXStep,
-    this.canvasHeight - this.cardHeight - 20 , 
-    this.cardWidth, this.cardHeight);
+    let image:HTMLImageElement = new Image();
+    image.src=this.cardImgSrcs[ref];
+    image.onload = ()=> {
+      this.canvasContext.drawImage(image, 
+      this.canvasWidth / 2 - 7 * cardXStep + ref * cardXStep,
+      this.canvasHeight - this.cardHeight - 20 , 
+      this.cardWidth, this.cardHeight);
+      }
   }
 
   drawBiddingText(){

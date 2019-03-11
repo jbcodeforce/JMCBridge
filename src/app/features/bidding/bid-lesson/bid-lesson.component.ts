@@ -6,7 +6,11 @@ import { BidExercise } from '../BidExercise';
 
 import { Tutorial } from '../../tutorial-reader/Tutorial';
 /**
- * Present a list of bidding lessons, in table format, according to the category selected
+ * Present two tables:
+ *  - a list of bidding tutorials for explaining the concepts, 
+ *  - a list of exercices to train on the subject
+ * But when a tutorial is selected the tables are replaced by a markdown reader.
+ * When an exercice is selected it goes to the big game with graphical cards.
  */
 @Component({
   selector: 'app-bid-lesson',
@@ -48,6 +52,7 @@ export class BidLessonComponent implements OnInit {
     this.router.navigate(['bidGame']);
   }
 
+  // present the tutorial
   learn(element:Tutorial){
     console.log("learn " + JSON.stringify(element));
     this.selectedTutorial=element;

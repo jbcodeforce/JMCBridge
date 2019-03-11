@@ -30,4 +30,10 @@ export class BidLessonsHomeComponent implements OnInit {
     this.bidService.setLessonCategoryName('defense');
     this.router.navigate(['bidLesson']);
   }
+
+  response() {
+    console.log('Response setting');
+    this.bidService.setLessonCategoryName('response');
+    this.router.navigate(['bidLesson']);
+  }
 }
