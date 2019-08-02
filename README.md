@@ -7,8 +7,8 @@ A web app to support educating on Bridge contract card game with the major by 5 
 * [x] Serve angular app with Flask - 
 * [x] Create API end point for the current bidding service so data comes from backend
 * [x] Add CORS to flask - run flask in continuous debug
-* [ ] Create first lesson for opening at 1 trick: this will be a set of markdown files and popup dialog with navigation buttons
-* [ ] Dockerize and deploy to IKS or cloud foundry 
+* [x] Create first lesson for opening at 1 trick: this will be a set of markdown files and popup dialog with navigation buttons. See json file in server/data and in markdown in src/assets folder. 
+* [x] Dockerize and deploy to IKS or cloud foundry 
 * [x] Load lesson exercises from files in the data folder and exposed as json objets
 * [ ] Merge user data into exercise for completion and next exercise
 * [ ] UI with canvas to navigate exercises

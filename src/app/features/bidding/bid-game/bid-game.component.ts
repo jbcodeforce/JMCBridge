@@ -37,8 +37,8 @@ export class BidGameComponent implements AfterViewInit {
   @ViewChild('biddings') biddingImg: ElementRef;
 
   private canvasContext: CanvasRenderingContext2D;
-  canvasWidth: number = 1000;
-  canvasHeight: number = 500;
+  canvasWidth: number = 1100;
+  canvasHeight: number = 700;
   cardWidth: number = 85;
   cardHeight: number = 110;
   // dimensions for the bidding box on right bottom part of canvas
@@ -168,9 +168,9 @@ export class BidGameComponent implements AfterViewInit {
       this.canvasContext.fillText(this.bidValue +  this.colorText[this.bidColor],5,34);
     }
     this.canvasContext.fillText("North", 420,20);
-    this.canvasContext.fillText("South", 420,270);
-    this.canvasContext.fillText("East", 650,150);
-    this.canvasContext.fillText("West", 30,150);
+    this.canvasContext.fillText("South", 420,this.canvasHeight-230);
+    this.canvasContext.fillText("East", 650,this.canvasHeight-450);
+    this.canvasContext.fillText("West", 30,this.canvasHeight-450);
   }
 
   /**
